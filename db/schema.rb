@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180415144928) do
+ActiveRecord::Schema.define(version: 20180417115506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20180415144928) do
     t.datetime "image_updated_at"
     t.integer "discussion_id"
     t.string "slug"
+    t.string "videos"
+    t.string "video_name"
     t.index ["category_id"], name: "index_courses_on_category_id"
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
@@ -134,6 +136,7 @@ ActiveRecord::Schema.define(version: 20180415144928) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["role_id"], name: "index_users_on_role_id"
   end
+
 
   add_foreign_key "courses", "categories"
   add_foreign_key "courses", "users"

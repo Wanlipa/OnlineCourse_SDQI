@@ -77,6 +77,18 @@
       </ul>
       </p>
 
+
+     <p><strong> Uploads:</strong></p>
+       <ul>
+         <video autobuffer="autobuffer" preload="auto" style="width:50%;height:75%;" controls="controls" width="50%" height="75%" poster = "<%= @course.videos_url(:thumb) %>">
+           <source  src="<%= @course.videos_url%>"  />
+           <%if @course.videos_url.present? %>
+             <source type="video/mp4"  src="<%= @course.videos_url%>" />
+           <%end%>
+     </video>
+
+    $('video').mediaelementplayer();
+
     </div>
   </div>
 

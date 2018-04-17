@@ -104,6 +104,12 @@
       <% end %>
     </div>
 
+    <div class="pdfdocs">
+      <p>
+        <%= f.file_field :videos , class: "form-control" %>
+      </p> 
+    </div>
+
     <div class="link" style="margin-bottom: 10px">
       <%= link_to_add_association 'Add PDF documents', f, :pdfdocs,  class: "btn btn-primary" %>
     </div>
