@@ -1,10 +1,12 @@
 class Course < ApplicationRecord
+
   belongs_to :user
   belongs_to :category
   has_many :enrollments
   has_many :users, through: :enrollments
   has_many :discussions
   has_many :users, through: :discussions
+  mount_uploader :videos, VideosUploader
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
