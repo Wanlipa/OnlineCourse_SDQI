@@ -106,7 +106,7 @@
 
     <div class="pdfdocs">
       <p>
-        <%= f.file_field :videos , class: "form-control" %>
+        <%= f.file_field :videos , class: "form-control", onchange: "validateFiles(this);", data: { max_file_size: 5.gigabytes } %>
       </p> 
     </div>
 

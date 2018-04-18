@@ -42,6 +42,11 @@ class EnrollmentController < ApplicationController
     end
   end
 
+  def enrollments
+    @course = Course.all
+    @enrollments = Enrollment.where(user_id: current_user.id)
+    @user = User.all
+  end
   private
 
   def set_enrollment

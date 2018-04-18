@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'enrollment/update'
   post 'enrollment/update'
   patch 'enrollment/update'
-
+  get 'enrollment/enrollments'
 
   # Manage Courses
   resources :courses

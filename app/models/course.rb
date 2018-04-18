@@ -26,5 +26,12 @@ class Course < ApplicationRecord
 
 
   validates_presence_of :title
+  validate :videos_size_validation
+
+  private
+
+  def videos_size_validation
+    errors[:videos] << "should be less than 5GB" if avatar.size > 5.gigabytes
+  end
 
 end
