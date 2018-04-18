@@ -7,6 +7,8 @@ class Course < ApplicationRecord
   has_many :discussions
   has_many :users, through: :discussions
   mount_uploader :videos, VideosUploader
+  has_many :assignments
+  has_many :users, through: :assignments
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
@@ -31,12 +33,5 @@ class Course < ApplicationRecord
 
 
   validates_presence_of :title
-  validate :videos_size_validation
-
-  private
-
-  def videos_size_validation
-    errors[:videos] << "should be less than 5GB" if avatar.size > 5.gigabytes
-  end
 
 end

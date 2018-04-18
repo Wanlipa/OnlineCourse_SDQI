@@ -1,0 +1,38 @@
+<%= simple_form_for(assignment_show_path) do |f| %>
+  <%= f.error_notification %>
+  <% if user_signed_in? %>
+    <% if current_user.member? || current_user.admin? %>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <%= f.input :title, required: true, input_html: { class: 'form-control' }, wrapper: false%>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <%= f.input :description, required: true, input_html: { class: 'form-control' }, wrapper: false %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+           <%= f.text_field :proposed_date, :class => 'input_field', :value => Date.today, :disabled => true %>
+           <%= f.date_select :deadline, :start_date => Date.today  %>
+        </div>
+      <div>
+    <% else %>
+      <%= simple_form_for(assignment_show_path) do |f| %>
+        <%= f.fields_for :submission do |submission| %>
+          <%= render 'submission_field', f: submission , class: "form-control" %> </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div class="form-group row">
+    <div style="margin-left: 10px;">
+      <%= f.button :submit, class:"btn btn-outline-success" %>
+    </div>
+  </div>
+<% end %>
+
+

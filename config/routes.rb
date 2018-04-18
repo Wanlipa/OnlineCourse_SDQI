@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
+  get 'assignment/index'
+
+  get 'assignment/new'
+
+  get 'assignment/show'
+
   get 'home/index'
 
   get 'enrollment/enroll'
-
+  post 'assignment/create'
+  post 'assignment/update'
+  post 'assignment/new'
+  post 'assignment/show' 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # Home Page

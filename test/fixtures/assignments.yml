@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  status: false
+  submission: 
+  proposed_date: 2018-04-18
+  deadline: 2018-04-18
+  grade: MyString
+  user: one
+  course: one
+
+two:
+  title: MyString
+  description: MyText
+  status: false
+  submission: 
+  proposed_date: 2018-04-18
+  deadline: 2018-04-18
+  grade: MyString
+  user: two
+  course: two

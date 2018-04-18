@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418092449) do
+ActiveRecord::Schema.define(version: 20180418201258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignments", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.boolean "status"
+    t.date "proposed_date"
+    t.date "deadline"
+    t.string "grade"
+    t.bigint "user_id"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_assignments_on_course_id"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -44,10 +59,6 @@ ActiveRecord::Schema.define(version: 20180418092449) do
     t.datetime "image_updated_at"
     t.integer "discussion_id"
     t.string "slug"
-    t.string "clip_file_name"
-    t.string "clip_content_type"
-    t.integer "clip_file_size"
-    t.datetime "clip_updated_at"
     t.string "videos"
     t.string "video_name"
     t.index ["category_id"], name: "index_courses_on_category_id"
@@ -115,6 +126,19 @@ ActiveRecord::Schema.define(version: 20180418092449) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "submissions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "assignment_id"
+    t.string "document_file_name"
+    t.string "document_content_type"
+    t.integer "document_file_size"
+    t.datetime "document_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assignment_id"], name: "index_submissions_on_assignment_id"
+    t.index ["user_id"], name: "index_submissions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -141,18 +165,6 @@ ActiveRecord::Schema.define(version: 20180418092449) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
-  create_table "videos", force: :cascade do |t|
-    t.string "name"
-    t.bigint "course_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "clip_file_name"
-    t.string "clip_content_type"
-    t.integer "clip_file_size"
-    t.datetime "clip_updated_at"
-    t.index ["course_id"], name: "index_videos_on_course_id"
-  end
-
   create_table "youtubes", force: :cascade do |t|
     t.string "url"
     t.bigint "course_id"
@@ -161,12 +173,15 @@ ActiveRecord::Schema.define(version: 20180418092449) do
     t.index ["course_id"], name: "index_youtubes_on_course_id"
   end
 
+  add_foreign_key "assignments", "courses"
+  add_foreign_key "assignments", "users"
   add_foreign_key "courses", "categories"
   add_foreign_key "courses", "users"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
   add_foreign_key "pdfdocs", "courses"
+  add_foreign_key "submissions", "assignments"
+  add_foreign_key "submissions", "users"
   add_foreign_key "users", "roles"
-  add_foreign_key "videos", "courses"
   add_foreign_key "youtubes", "courses"
 end

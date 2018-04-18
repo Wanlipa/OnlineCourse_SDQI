@@ -5,9 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
 
-
   belongs_to :role
   has_many :courses
+  has_many :assignments
+  has_many :courses, through: :assignments
   has_many :enrollments
   has_many :courses, through: :enrollments
   has_many :discussions, dependent: :destroy

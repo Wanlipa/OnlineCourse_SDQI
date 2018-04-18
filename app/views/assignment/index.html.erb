@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10">
+      <h1 style="margin-left: 15px">Assignments</h1>
+    </div>
+    <% if user_signed_in? && current_user.student? == true %>
+      <div class="col-sm-2">
+        <h1><%= link_to 'View Courses', courses_path ,class: "btn btn-success"%></h1>
+      </div>
+    <% else %>
+      <div class="col-sm-2">
+        <h2><%= link_to 'New Assignment', assignment_new_path(:course_id => @course.id), class: "btn btn-default"%></h2>
+        <h2><%= link_to 'View Courses', courses_path ,class: "btn btn-success"%></h2>
+      </div>
+    <% end %>
+  </div>
+  <table class="table table-hover">
+    <thead class="bg-secondary">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Release Date</th>
+        <th>Deadline</th>
+        <th>
+        <th colspan="5"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%  if @assignments.present? == false %> 
+        <div class="media-content">
+          <div class="content">
+                Currently, There are no Assignments for the courses you have enrolled. Please Come back Later." 
+          </div>
+        </div>
+      <% else %> 
+        <% current_user.enrollments.each do |enroll| %>
+          <% @encourse = Assignment.where(:course_id => enroll.course_id) %> 
+        <% end %>
+        <% @encourse.each do |encourse| %>
+          <tr>
+            <td><%= encourse.id %></td>
+            <td><%= encourse.title %></td>
+            <td><%= encourse.status %></td>
+            <td><%= encourse.proposed_date %></td>
+            <td><%= encourse.deadline %></td>
+            <td style="text-align: right;">
+              <%= link_to 'Show', assignment_show_path(:id => encourse.id) ,class: "btn btn-outline-info btn-sm"%>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+</div>
+
+
+
