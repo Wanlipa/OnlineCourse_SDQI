@@ -32,6 +32,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @enrollment = Enrollment.where(:course_id => @course.id)
     @discussions = Discussion.where(:course_id => @course.id)
+    @youtube = Youtube.where(:course_id => @course.id)
     respond_to do |format|
       format.html
       format.pdf do
@@ -116,6 +117,7 @@ class CoursesController < ApplicationController
     def course_params
       params.require(:course).permit(:title, :videos, :objective, :description, :instructor, :category_id, :image,
                                      :length, :effort, :price, :institution, :level, :languages, :videots, :prerequisites,
-                                     pdfdocs_attributes: [:id, :name, :document, :_destroy])
+                                     pdfdocs_attributes: [:id, :name, :document, :_destroy],
+                                     youtubes_attributes: [:id, :url, :_destroy])
     end
 end

@@ -69,6 +69,18 @@ gem 'rails_admin', '~> 1.3'
 
 # kaltura video transcode
 gem 'kaltura'
+# video info
+gem 'video_info'
+
+# cucumber for UAT
+group :test do
+  gem 'cucumber-rails', :require => false
+# database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'launchy'
+  gem 'rspec-rails'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
