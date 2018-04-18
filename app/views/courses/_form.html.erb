@@ -104,16 +104,26 @@
       <% end %>
     </div>
 
-    <div class="pdfdocs">
-      <p>
-        <%= f.file_field :videos , class: "form-control" %>
-      </p> 
-    </div>
+<!--    <div class="pdfdocs">-->
+<!--      <p>-->
+        <%#= f.file_field :videos , class: "form-control" %>
+<!--      </p> -->
+<!--    </div>-->
 
     <div class="link" style="margin-bottom: 10px">
-      <%= link_to_add_association 'Add PDF documents', f, :pdfdocs,  class: "btn btn-primary" %>
+      <%= link_to_add_association 'Add PDF', f, :pdfdocs,  class: "btn btn-primary" %>
     </div>
 
+
+  <div class="youtubes">
+    <%= f.fields_for :youtubes do |youtube| %>
+      <%= render 'youtube_fields', f: youtube, class: "form-control" %>
+    <% end %>
+  </div>
+
+  <div class="link" style="margin-bottom: 10px">
+    <%= link_to_add_association 'Add Youtube', f, :youtubes, class: "btn btn-primary" %>
+  </div>
 
 
   <div class="btn-group" role="group" aria-label="Basic example">

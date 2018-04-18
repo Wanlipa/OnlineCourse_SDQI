@@ -68,6 +68,8 @@
       </div>
 
       <br>
+
+      <% if @course.enrollments.exists?(:user_id => current_user.id) == true or current_user.admin? or current_user.member?%>
       <p>
         <strong>Pdf File:</strong>
       <ul>
@@ -77,17 +79,31 @@
       </ul>
       </p>
 
+      <br>
 
-     <p><strong> Uploads:</strong></p>
-       <ul>
-         <video autobuffer="autobuffer" preload="auto" style="width:50%;height:75%;" controls="controls" width="50%" height="75%" poster = "<%= @course.videos_url(:thumb) %>">
-           <source  src="<%= @course.videos_url%>"  />
-           <%if @course.videos_url.present? %>
-             <source type="video/mp4"  src="<%= @course.videos_url%>" />
-           <%end%>
-     </video>
+      <p>
+        <strong>Youtube:</strong>
+      <ul>
+        <% @course.youtubes.each do |yt| %>
+          <%y_id = yt.url %>
+          <% @youtube = y_id.split('=').last %>
+          <li>
+            <iframe width="500" height="250" src="https://www.youtube.com/embed/<%= @youtube %>" ></iframe>
+          </li>
+        <% end %>
+      </ul>
+      </p>
+    <%end %>
+<!--     <p><strong> Uploads:</strong></p>-->
+<!--       <ul>-->
+<!--         <video autobuffer="autobuffer" preload="auto" style="width:50%;height:75%;" controls="controls" width="50%" height="75%" poster = "<%#= @course.videos_url(:thumb) %>">-->
+<!--           <source  src="<%#= @course.videos_url%>"  />-->
+           <%#if @course.videos_url.present? %>
+<!--             <source type="video/mp4"  src="<%#= @course.videos_url%>" />-->
+           <%#end%>
+<!--     </video>-->
 
-    $('video').mediaelementplayer();
+<!--    $('video').mediaelementplayer();-->
 
     </div>
   </div>

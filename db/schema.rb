@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180417115506) do
+ActiveRecord::Schema.define(version: 20180418092449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,10 @@ ActiveRecord::Schema.define(version: 20180417115506) do
     t.datetime "image_updated_at"
     t.integer "discussion_id"
     t.string "slug"
+    t.string "clip_file_name"
+    t.string "clip_content_type"
+    t.integer "clip_file_size"
+    t.datetime "clip_updated_at"
     t.string "videos"
     t.string "video_name"
     t.index ["category_id"], name: "index_courses_on_category_id"
@@ -137,6 +141,25 @@ ActiveRecord::Schema.define(version: 20180417115506) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  create_table "videos", force: :cascade do |t|
+    t.string "name"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "clip_file_name"
+    t.string "clip_content_type"
+    t.integer "clip_file_size"
+    t.datetime "clip_updated_at"
+    t.index ["course_id"], name: "index_videos_on_course_id"
+  end
+
+  create_table "youtubes", force: :cascade do |t|
+    t.string "url"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_youtubes_on_course_id"
+  end
 
   add_foreign_key "courses", "categories"
   add_foreign_key "courses", "users"
@@ -144,4 +167,6 @@ ActiveRecord::Schema.define(version: 20180417115506) do
   add_foreign_key "enrollments", "users"
   add_foreign_key "pdfdocs", "courses"
   add_foreign_key "users", "roles"
+  add_foreign_key "videos", "courses"
+  add_foreign_key "youtubes", "courses"
 end

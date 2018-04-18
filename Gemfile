@@ -69,6 +69,8 @@ gem 'rails_admin', '~> 1.3'
 
 # kaltura video transcode
 gem 'kaltura'
+# video info
+gem 'video_info'
 
 # cucumber for UAT
 group :test do
