@@ -88,7 +88,7 @@
           <%y_id = yt.url %>
           <% @youtube = y_id.split('=').last %>
           <li>
-            <iframe width="500" height="250" src="https://www.youtube.com/embed/<%= @youtube %>" ></iframe>
+            <iframe width="500" height="250" src="https://www.youtube.com/embed/<%= @youtube %>" allowfullscreen></iframe>
           </li>
         <% end %>
       </ul>
